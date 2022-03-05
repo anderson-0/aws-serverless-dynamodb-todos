@@ -2,7 +2,7 @@
   "name": "aws-serverless-dynamodb-todo",
   "version": "1.0.0",
   "description": "Serverless aws-serverless-dynamodb-nodejs-typescript template",
-  "author": "Anderson da Silva<anderson.consultnat.it@outlook.com>",
+  "author": "Anderson da Silva<anderson.consultant.it@outlook.com>",
   "scripts": {
     "dev": "serverless offline ",
     "dynamo:start": "serverless dynamodb start",
