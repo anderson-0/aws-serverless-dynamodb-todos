@@ -2,8 +2,7 @@ import { document } from "src/utils/dynamodbClient";
 import dayjs from "dayjs";
 import {validate} from 'uuid'
 import { uuid } from "uuidv4";
-
-
+import AWS from "aws-sdk";
 interface ICreateTodoDTO {
     id: string;
     title: string;
@@ -31,8 +30,32 @@ export const handle = async (event) => {
         },
     })
     .promise();
-    
+
+    const params = {
+        Destination: {
+        ToAddresses: ['anderson.dasilva@osf.digital'],
+        },
+        Message: {
+        Body: {
+            Text: { Data: `Hi there, you created a new Todo with id ${id}` },
+        },
+        Subject: { Data: 'Todo Creation' },
+        },
+        Source: 'anderson.dasilva@osf.digital',
+    };
+
+    const ses = new AWS.SES();
+    await ses.sendEmail(params).promise();
     return {
-        statusCode: 201
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Origin": "*",
+      },
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "email sent successfully!",
+        success: true,
+      }),
     };
 }

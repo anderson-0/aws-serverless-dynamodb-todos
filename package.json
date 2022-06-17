@@ -5,6 +5,7 @@
   "author": "Anderson da Silva<anderson.consultant.it@outlook.com>",
   "scripts": {
     "dev": "serverless offline ",
+    "debug": "set SLS_DEBUG=* && node --inspect node_modules/serverless/bin/serverless offline -s dev",
     "dynamo:start": "serverless dynamodb start",
     "deploy": "serverless deploy -v"
   },
@@ -12,6 +13,7 @@
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.2.0",
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "dayjs": "^1.10.6",
